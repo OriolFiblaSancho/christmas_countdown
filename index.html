@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Christmas Countdown</title>
+
+        <link rel="stylesheet" href="styles.css">
+        
+    </head>
+
+    <body>
+
+        <div class="title">
+            <h1>Christmas Countdown</h1>
+            <h4>Days until christmas 2024</h4>
+        </div>
+
+        <div class="timer">
+            <span id="dys">00</span>
+            <span>:</span>
+            <span id="hrs">00</span>
+            <span>:</span>
+            <span id="min">00</span>
+            <span>:</span>
+            <span id="sec">00</span>
+        </div>
+    </body>
+
+    <script>
+        let dys = document.getElementById('dys');
+        let hrs = document.getElementById('hrs');
+        let min = document.getElementById('min');
+        let sec = document.getElementById('sec');
+
+        let currentTime = new Date();
+
+        if(currentTime.getMonth() == 12 && currentTime.getDate() > 25){
+            document.querySelector('.title h4').style.display = 'none';
+            document.querySelector("title h1").innerHTML = "Merry Christmas!!!";
+        }else{
+            let nextChristmas = new Date(currentTime.getFullYear(), 11, 25);
+            let timeLeft = nextChristmas - currentTime;
+
+            let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            dys.innerHTML = days;
+            hrs.innerHTML = hours;
+            min.innerHTML = minutes;
+            sec.innerHTML = seconds;
+
+            setInterval(() => {
+                currentTime = new Date();
+                timeLeft = nextChristmas - currentTime;
+
+                days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                dys.innerHTML = days;
+                hrs.innerHTML = hours;
+                min.innerHTML = minutes;
+                sec.innerHTML = seconds;
+            }, 1000);
+        }
+
+
+
+    </script>
+</html>
